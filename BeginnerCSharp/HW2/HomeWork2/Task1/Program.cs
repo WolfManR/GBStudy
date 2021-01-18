@@ -29,6 +29,9 @@ namespace Task1
 
             var averageTemperature = (min + max) / 2;
             WriteLine($"The average daily temperature is {averageTemperature}");
+            
+            // Program Stop
+            ReadLine();
         }
     }
 }

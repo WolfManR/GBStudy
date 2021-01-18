@@ -28,6 +28,9 @@ namespace Task2
             var date = new DateTime(2021, number, 1);
             
             WriteLine($"Current month name is {date.ToString("MMMM", CultureInfo.CurrentCulture)}");
+            
+            // Program Stop
+            ReadLine();
         }
     }
 }
