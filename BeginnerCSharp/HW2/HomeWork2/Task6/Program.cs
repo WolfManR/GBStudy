@@ -1,5 +1,4 @@
-﻿using System;
-using static System.Console;
+﻿using static System.Console;
 using static Task6.DayOfWeek;
 
 namespace Task6
@@ -7,13 +6,13 @@ namespace Task6
     [System.Flags]
     internal enum DayOfWeek
     {
-        Monday     = 0b_1000000,
-        Tuesday    = 0b_0100000,
-        Wednesday  = 0b_0010000,
+        Monday     = 0b_0000001,
+        Tuesday    = 0b_0000010,
+        Wednesday  = 0b_0000100,
         Thursday   = 0b_0001000,
-        Friday     = 0b_0000100,
-        Saturday   = 0b_0000010,
-        Sunday     = 0b_0000001
+        Friday     = 0b_0010000,
+        Saturday   = 0b_0100000,
+        Sunday     = 0b_1000000
     }
     
     
@@ -37,7 +36,7 @@ namespace Task6
             var input = ReadLine();
             
             // mask only for debug
-            var mask = Enum.TryParse(input,out DayOfWeek days);
+            var mask = System.Enum.TryParse(input,out DayOfWeek days);
             
             var userWorkday = (DayOfWeek)0b_0111000;
             if(mask) userWorkday = days;
