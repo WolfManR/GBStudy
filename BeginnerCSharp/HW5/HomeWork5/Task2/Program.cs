@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Task2
 {
@@ -6,7 +7,10 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            
+            using var sw = File.AppendText("startup.txt");
+            var time = DateTime.Now.ToString("HH:mm:ss tt");
+            sw.WriteLine(time);
+            Console.WriteLine($"I add to startup.txt new time, it's {time}, go check");
         }
     }
 }
