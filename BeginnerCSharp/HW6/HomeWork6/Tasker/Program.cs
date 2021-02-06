@@ -8,23 +8,47 @@ namespace Tasker
     internal class Program
     {
         private const char Prefix = '-';
+        private const string IncorrectArgsMsg = "Incorrect arguments line";
         private static void Main(string[] args)
         {
             HandleCommandLine(args);
 
-            ReadLine();
+            WriteLine("Work Done");
         }
 
         static void HandleCommandLine(string[] args)
         {
-            var arguments = new Dictionary<char, string>();
             if(args.Length == 0) return;
-            for (var i = 0; i < args.Length; i+=2)
-                arguments.Add(args[i].TrimStart(Prefix)[0],args.Length <= i+1? null:args[i+1]);
+            
+            List<(char, string)> pairs = new();
+            for (var i = 0; i < args.Length; i++)
+            {
+                if(args[i].StartsWith(Prefix))
+                    pairs.Add((args[i].TrimStart(Prefix)[0], null));
+                else
+                {
+                    if (pairs.Count == 0)
+                    {
+                        WriteLine(IncorrectArgsMsg);
+                        return;
+                    }
+                    var (key, value) = pairs.Last();
+                    if (value is null)
+                    {
+                        pairs[^1] = (key,args[i]);
+                    }
+                    else
+                    {
+                        WriteLine(IncorrectArgsMsg);
+                        return;
+                    }
+                }
+            }
+            
 
             try
             {
-                foreach (var (arg, value) in arguments)
+                foreach (var (arg, value) in pairs)
                 {
                     switch (arg)
                     {
@@ -95,7 +119,7 @@ namespace Tasker
         {
             try
             {
-                Process.GetProcessById(pid).WaitForExit();
+                Process.GetProcessById(pid).Kill(true);
             } catch { throw; }
         }
         
@@ -103,7 +127,8 @@ namespace Tasker
         {
             try
             {
-                Process.GetProcessesByName(name).ToList().ForEach(process => process.WaitForExit());
+                var processes = Process.GetProcessesByName(name);
+                processes[0].Kill(true);
             } catch { throw; }
         }
 
