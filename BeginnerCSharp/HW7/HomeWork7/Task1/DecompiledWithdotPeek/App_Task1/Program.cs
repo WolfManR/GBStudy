@@ -11,12 +11,12 @@ namespace AppFor_Task1_Task2
 {
   internal class Program
   {
-    private static void Main(string[] args) => new ConsolePrinter((IEnumerable<CharConsoleColor>) new CharConsoleColor[4]
+    private static void Main(string[] args) => new ConsolePrinter( new CharConsoleColor[]
     {
-      new CharConsoleColor('H', ConsoleColor.Cyan),
-      new CharConsoleColor('l', ConsoleColor.Yellow),
-      new CharConsoleColor('W', ConsoleColor.Red),
-      new CharConsoleColor('d', ConsoleColor.Magenta)
+      new('H', ConsoleColor.Cyan),
+      new('l', ConsoleColor.DarkBlue),
+      new('W', ConsoleColor.Red),
+      new('d', ConsoleColor.DarkYellow)
     }).Print("Hello World!");
   }
 }

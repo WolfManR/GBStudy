@@ -13,20 +13,20 @@ namespace AppFor_Task1_Task2
   public class ConsolePrinter
   {
     private readonly List<CharConsoleColor> _colors;
-    private const ConsoleColor DefaultColor = ConsoleColor.White;
+    private const ConsoleColor DefaultColor = ConsoleColor.Green;
 
-    public ConsolePrinter(IEnumerable<CharConsoleColor> colors) => this._colors = colors.ToList<CharConsoleColor>();
+    public ConsolePrinter(IEnumerable<CharConsoleColor> colors) => _colors = colors.ToList();
 
     public void Print(string toPrint)
     {
-      int length = toPrint.Length;
-      for (int i = 0; i < length; i++)
+      var length = toPrint.Length;
+      for (var i = 0; i < length; i++)
       {
-        CharConsoleColor charConsoleColor = this._colors.Find((Predicate<CharConsoleColor>) (c => (int) (char) c == (int) toPrint[i]));
+        var charConsoleColor = _colors.Find(c => c == toPrint[i]);
         if (charConsoleColor == null)
           Console.Write(toPrint[i]);
         else
-          ConsolePrinter.PrintWithColor(toPrint[i], (ConsoleColor) charConsoleColor);
+          PrintWithColor(toPrint[i], (ConsoleColor) charConsoleColor);
       }
     }
 
@@ -34,7 +34,7 @@ namespace AppFor_Task1_Task2
     {
       Console.ForegroundColor = color;
       Console.Write(character);
-      Console.ForegroundColor = ConsoleColor.White;
+      Console.ForegroundColor = DefaultColor;
     }
   }
 }
