@@ -91,7 +91,7 @@
     IL_001f:  dup
     IL_0020:  ldc.i4.2
     IL_0021:  ldc.i4.s   87
-    IL_0023:  ldc.i4.s   12
+    IL_0023:  ldc.i4.s   11
     IL_0025:  newobj     instance void AppFor_Task1_Task2.CharConsoleColor::.ctor(char,
                                                                                   valuetype [System.Console]System.ConsoleColor)
     IL_002a:  stelem.ref
@@ -105,7 +105,7 @@
     IL_0037:  newobj     instance void AppFor_Task1_Task2.ConsolePrinter::.ctor(class [System.Runtime]System.Collections.Generic.IEnumerable`1<class AppFor_Task1_Task2.CharConsoleColor>)
     IL_003c:  stloc.0
     IL_003d:  ldloc.0
-    IL_003e:  ldstr      "Hello World!"
+    IL_003e:  ldstr      "Hello Hard, Simple World!"
     IL_0043:  callvirt   instance void AppFor_Task1_Task2.ConsolePrinter::Print(string)
     IL_0048:  nop
     IL_0049:  ret
@@ -294,13 +294,13 @@
     .maxstack  8
     IL_0000:  nop
     IL_0001:  ldarg.1
-    IL_0002:  call       void [System.Console]System.Console::set_ForegroundColor(valuetype [System.Console]System.ConsoleColor)
+    IL_0002:  call       void [System.Console]System.Console::set_BackgroundColor(valuetype [System.Console]System.ConsoleColor)
     IL_0007:  nop
     IL_0008:  ldarg.0
     IL_0009:  call       void [System.Console]System.Console::Write(char)
     IL_000e:  nop
     IL_000f:  ldc.i4.s   15
-    IL_0011:  call       void [System.Console]System.Console::set_ForegroundColor(valuetype [System.Console]System.ConsoleColor)
+    IL_0011:  call       void [System.Console]System.Console::set_BackgroundColor(valuetype [System.Console]System.ConsoleColor)
     IL_0016:  nop
     IL_0017:  ret
   } // end of method ConsolePrinter::PrintWithColor
