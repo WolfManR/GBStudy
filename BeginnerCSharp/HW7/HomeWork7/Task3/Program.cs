@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.IO;
-using Task3.Services;
+using System.Runtime.CompilerServices;
+using Application.Services;
+using Infrastructure.Services;
 using static System.Console;
 
 namespace Task3
@@ -8,6 +10,9 @@ namespace Task3
     class Program
     {
         private const string CheckInfoFilePath = "CheckInfo.json";
+        private static Checker _checkerService;
+        private static int _readedCounter = 0;
+        const string ReadedFormatter = "readed {0}";
         
         
         static void Main(string[] args)
@@ -17,29 +22,30 @@ namespace Task3
             var watch = new Stopwatch();
             watch.Start();
 
-            var fileReader = new FileReader();
-            var checkSavior = new CheckInfoSavior(CheckInfoFilePath);
-            var checker = new Checker(fileReader,checkSavior);
-            
-            var readedCounter = 0;
-            const string readedFormatter = "readed {0}";
-            
-            checker.OnFileReaded += () =>
-            {
-                WriteLine(readedFormatter, ++readedCounter);
-            };
-            checker.WorkExceptionHandler += static exception =>
-            {
-                WriteLine(exception.Message);
-                return true;
-            };
-            
-            checker.StartCheck(path);
+            _checkerService.StartCheck(path);
             
             watch.Stop();
             WriteLine($"Elapsed time {watch.Elapsed.TotalMilliseconds}");
         }
 
+        
+        [ModuleInitializer]
+        public static void InitCheckerService()
+        {
+            var fileReader = new FileReader();
+            var checkSavior = new CheckInfoSavior(CheckInfoFilePath);
+            _checkerService = new (fileReader,checkSavior);
+            _checkerService.OnFileReaded += () =>
+            {
+                WriteLine(ReadedFormatter, ++_readedCounter);
+            };
+            _checkerService.WorkExceptionHandler += static exception =>
+            {
+                WriteLine(exception.Message);
+                return true;
+            };
+        }
+        
         
         private static bool HandleUserInputPath(out string path)
         {
