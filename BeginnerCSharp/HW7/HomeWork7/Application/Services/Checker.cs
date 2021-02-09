@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Task3.Interfaces;
-using Task3.Models;
+using Application.Interfaces;
+using Domain.DTOs;
 
-namespace Task3.Services
+namespace Application.Services
 {
     public class Checker
     {

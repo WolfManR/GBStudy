@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Task3.Interfaces
+namespace Application.Interfaces
 {
     public interface IFileReader
     {

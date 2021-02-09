@@ -1,6 +1,6 @@
-using Task3.Models;
+using Domain.DTOs;
 
-namespace Task3.Interfaces
+namespace Application.Interfaces
 {
     public interface ICheckInfoSavior
     {
