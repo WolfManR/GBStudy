@@ -4,8 +4,10 @@ using Application.Interfaces;
 
 namespace Infrastructure.Services
 {
+    /// <inheritdoc/>
     public class FileReader : IFileReader
     {
+        /// <inheritdoc/>
         public IEnumerable<string> TakeFiles(string directory)
         {
             var files = Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories);
@@ -13,6 +15,7 @@ namespace Infrastructure.Services
                 yield return file;
         }
 
+        /// <inheritdoc/>
         public bool ReadFile(FileInfo file)
         {
             try

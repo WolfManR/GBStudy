@@ -7,18 +7,28 @@ using Domain.DTOs;
 
 namespace Infrastructure.Services
 {
+    /// <inheritdoc/>
     public class CheckInfoSavior : ICheckInfoSavior
     {
+        public CheckInfoSavior(string checkInfoFilePath) => _checkInfoFilePath = checkInfoFilePath;
+        
+        
+        /// <summary>
+        /// Cached path to file where saved check result
+        /// </summary>
         private readonly string _checkInfoFilePath;
         
+        /// <summary>
+        /// Format options to serialization
+        /// </summary>
         private static readonly JsonSerializerOptions Options = new()
         {
             WriteIndented = true,
             Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic)
         };
 
-        public CheckInfoSavior(string checkInfoFilePath) => _checkInfoFilePath = checkInfoFilePath;
-
+        
+        /// <inheritdoc/>
         public CheckInfo LoadCheckInfo()
         {
             if (!File.Exists(_checkInfoFilePath)) 
@@ -29,6 +39,7 @@ namespace Infrastructure.Services
             return info;
         }
         
+        /// <inheritdoc/>
         public void SaveCheckInfo(CheckInfo info)
         {
             var json = JsonSerializer.Serialize(info, Options);

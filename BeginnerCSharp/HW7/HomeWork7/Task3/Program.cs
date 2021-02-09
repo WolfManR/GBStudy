@@ -9,12 +9,6 @@ namespace Task3
 {
     class Program
     {
-        private const string CheckInfoFilePath = "CheckInfo.json";
-        private static Checker _checkerService;
-        private static int _readedCounter = 0;
-        const string ReadedFormatter = "readed {0}";
-        
-        
         static void Main(string[] args)
         {
             if (!HandleUserInputPath(out var path)) return;
@@ -27,8 +21,31 @@ namespace Task3
             watch.Stop();
             WriteLine($"Elapsed time {watch.Elapsed.TotalMilliseconds}");
         }
-
         
+        
+        /// <summary>
+        /// Path to file where program saved check result
+        /// </summary>
+        private const string CheckInfoFilePath = "CheckInfo.json";
+        
+        /// <inheritdoc cref="Checker"/>
+        private static Checker _checkerService;
+        
+        /// <summary>
+        /// Counter of readed files
+        /// </summary>
+        private static int _readedCounter = 0;
+        
+        /// <summary>
+        /// formatter of message about readed files
+        /// </summary>
+        private const string ReadedFormatter = "readed {0}";
+        
+        
+        
+        /// <summary>
+        /// Initialize main program module and it's dependencies to check files
+        /// </summary>
         [ModuleInitializer]
         public static void InitCheckerService()
         {
@@ -46,7 +63,11 @@ namespace Task3
             };
         }
         
-        
+        /// <summary>
+        /// Get path to check from user and check that this path exists and it's correct, or return if user wanna exit
+        /// </summary>
+        /// <param name="path">Path to Directory that must be checked</param>
+        /// <returns>true if path correct, false if user wanna leave program</returns>
         private static bool HandleUserInputPath(out string path)
         {
             path = null;
