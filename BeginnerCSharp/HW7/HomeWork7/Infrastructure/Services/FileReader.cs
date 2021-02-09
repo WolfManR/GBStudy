@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
-using Task3.Interfaces;
+using Application.Interfaces;
 
-namespace Task3.Services
+namespace Infrastructure.Services
 {
     public class FileReader : IFileReader
     {

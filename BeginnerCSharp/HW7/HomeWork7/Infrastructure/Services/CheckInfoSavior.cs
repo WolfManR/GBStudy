@@ -2,10 +2,10 @@ using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using Task3.Interfaces;
-using Task3.Models;
+using Application.Interfaces;
+using Domain.DTOs;
 
-namespace Task3.Services
+namespace Infrastructure.Services
 {
     public class CheckInfoSavior : ICheckInfoSavior
     {
