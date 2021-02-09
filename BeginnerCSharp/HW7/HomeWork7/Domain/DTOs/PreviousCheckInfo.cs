@@ -1,6 +1,6 @@
 using System;
 
-namespace Task3.Models
+namespace Domain.DTOs
 {
     public record PreviousCheckInfo(string CheckPath, DateTime LastCheck);
 }
