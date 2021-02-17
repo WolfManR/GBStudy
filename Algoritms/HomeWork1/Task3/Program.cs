@@ -2,7 +2,7 @@
 
 namespace Task3
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -30,7 +30,7 @@ namespace Task3
         }
 
 
-        private static int RecursiveFibonacci(int number) =>
+        public static int RecursiveFibonacci(int number) =>
             number switch
             {
                 0 => 0,
@@ -38,7 +38,7 @@ namespace Task3
                 _ => RecursiveFibonacci(number - 2) + RecursiveFibonacci(number - 1)
             };
 
-        private static int LoopFibonacci(int number)
+        public static int LoopFibonacci(int number)
         {
             if (number == 0) return 0;
             if (number == 1) return 1;
