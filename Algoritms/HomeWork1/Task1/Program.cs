@@ -2,7 +2,7 @@
 
 namespace Task1
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -29,7 +29,7 @@ namespace Task1
             Console.ReadLine();
         }
         
-        private static bool IsPrimeNumber(int n)
+        public static bool IsPrimeNumber(int n)
         {
             var d = 0;
             var i = 2;
