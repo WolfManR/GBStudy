@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Task1.ListRealization;
 
 namespace Task1
 {
@@ -8,7 +9,8 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            
+            MyLinkedList sub = new(2, 3, 5, 7, 8);
+            var result = sub.FindNode(3);
         }
     }
 }
@@ -43,7 +45,12 @@ namespace Task1.ListRealization
         public int Length => counter;
 
         public MyLinkedList() { }
-        public MyLinkedList(int value) => StartPoint = LastNode = new() {Value = value};
+        public MyLinkedList(int value)
+        {
+            StartPoint = LastNode = new() {Value = value};
+            counter++;
+        }
+
         public MyLinkedList(params int[] values)
         {
             StartPoint = LastNode = new() {Value = values[0]};
@@ -65,7 +72,7 @@ namespace Task1.ListRealization
             if(counter/2 >= index)
             {
                 needed = StartPoint;
-                for (var i = 0; i <= index; i++)
+                for (var i = 1; i <= index; i++)
                 {
                     needed = needed.NextNode;
                 }
@@ -201,7 +208,8 @@ namespace Task1.ListRealization
             do
             {
                 if(current.Value == searchValue) return current;
-            } while (current.NextNode is not null);
+                current = current.NextNode;
+            } while (current is not null);
 
             return null;
         }
