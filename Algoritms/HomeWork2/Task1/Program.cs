@@ -17,13 +17,11 @@ namespace Task1
 
 namespace Task1.ListRealization
 {
-    public record Node
+    public class Node
     {
         public int Value { get; set; }
         public Node NextNode { get; set; }
         public Node PrevNode { get; set; }
-        
-        // todo: to remake to class, add IEqualityComparer support 
     }
 
     //Начальную и конечную ноду нужно хранить в самой реализации интерфейса
@@ -65,11 +63,11 @@ namespace Task1.ListRealization
         
         private Node GetNodeOnIndex(int index)
         {
-            if (index < 0 || index > counter) return null;
+            if (IsIndexNotInRange(index)) return null;
             
             Node needed;
             
-            if(counter/2 >= index)
+            if(counter-1/2 >= index)
             {
                 needed = StartPoint;
                 for (var i = 1; i <= index; i++)
@@ -80,7 +78,7 @@ namespace Task1.ListRealization
             else
             {
                 needed = LastNode;
-                for (var i = counter - 1; i >= index; i--)
+                for (var i = counter - 1; i > index; i--)
                 {
                     needed = needed.PrevNode;
                 }
@@ -89,8 +87,8 @@ namespace Task1.ListRealization
             return needed;
         }
 
-        private bool IsNodeExistInCurrentList(Node node) => GetEnumerator().Any(current => current == node);
-
+        private bool IsNodeExistInCurrentList(Node node)=> AsIEnumerable().Any(current => current == node);
+        private bool IsIndexNotInRange(int index) => index < 0 || index >= counter;
         public int this[int index]
         {
             get => GetNodeOnIndex(index)?.Value ?? throw new IndexOutOfRangeException();
@@ -102,14 +100,44 @@ namespace Task1.ListRealization
             }
         }
 
-        public IEnumerable<Node> GetEnumerator()
+        public int[] Slice(int start, int last)
+        {
+            if(IsIndexNotInRange(start) || last < start)
+                throw new("There must be custom exception about not existing node in current collection");
+            if(last > counter || start + last > counter)
+                throw new("There must be custom exception about not existing node in current collection");
+            
+            var result = new int[last];
+            var startNode = StartPoint;
+            for (var i = 0; i < start; i++)
+            {
+                startNode = startNode.NextNode;
+            }
+
+            result[0] = startNode.Value;
+            for (var i = 1; i < last; i++)
+            {
+                startNode = startNode.NextNode;
+                result[i] = startNode.Value;
+            }
+
+            return result;
+        }
+
+        public IEnumerator<Node> GetEnumerator()
         {
             var current = StartPoint;
             do
             {
                 yield return current;
                 current = current.NextNode;
-            } while (current.NextNode is not null);
+            } while (current is not null);
+        }
+
+        public IEnumerable<Node> AsIEnumerable()
+        {
+            foreach (var node in this)
+                yield return node;
         }
         
 
@@ -151,6 +179,9 @@ namespace Task1.ListRealization
         /// <inheritdoc />
         public void RemoveNode(int index)
         {
+            if(IsIndexNotInRange(index)) 
+                throw new("There must be custom exception about not existing node in current collection");
+            
             if (index == 0)
             {
                 if (StartPoint.NextNode is { } node)
@@ -188,6 +219,7 @@ namespace Task1.ListRealization
                 {
                     StartPoint = node.NextNode;
                     node.NextNode = null;
+                    StartPoint.PrevNode = null;
                 }
             }
             else
@@ -205,11 +237,11 @@ namespace Task1.ListRealization
         public Node FindNode(int searchValue)
         {
             var current = StartPoint;
-            do
+            while(current is not null)
             {
                 if(current.Value == searchValue) return current;
                 current = current.NextNode;
-            } while (current is not null);
+            }
 
             return null;
         }
