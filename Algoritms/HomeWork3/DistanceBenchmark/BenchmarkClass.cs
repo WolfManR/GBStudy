@@ -1,10 +1,13 @@
 using System;
 using System.Linq;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Order;
 using DistanceBenchmark.Points;
 
 namespace DistanceBenchmark
 {
+    [MemoryDiagnoser]
+    [Orderer(SummaryOrderPolicy.FastestToSlowest)]
     public class BenchmarkClass
     {
         private static readonly Random Random = new ();
