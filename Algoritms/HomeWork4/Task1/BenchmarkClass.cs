@@ -12,7 +12,10 @@ namespace Task1
         private const int Words = 9;
         private const int Sentences = 1;
         private const int Strings = 10000;
-
+        
+        private static readonly string SearchString;
+        private static readonly string[] Array;
+        private static readonly HashSet<string> HashSet;
         static BenchmarkClass()
         {
             var strings = LoremNET.Lorem.Paragraphs(Words, Sentences, Strings);
@@ -22,16 +25,13 @@ namespace Task1
             HashSet = strings.ToHashSet();
         }
 
-        private static readonly string SearchString;
-        private static readonly string[] Array;
-        private static readonly HashSet<string> HashSet;
-
         
         [Benchmark]
         public void Search_In_Array_With_LINQ()
         {
             _ = Array.Contains(SearchString);
         }
+        
         [Benchmark]
         public void Search_In_Array()
         {
