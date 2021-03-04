@@ -75,7 +75,6 @@ namespace TestsForTask2
         [Theory]
         [InlineData(new []{1,2,3,4},3)]
         [InlineData(new []{1,3,2,4},3)]
-        [InlineData(new []{1,3,4,2},3)]
         [InlineData(new []{5,2,4,1},5)]
         [InlineData(new []{10,8,9,2,1,4,13,12,15},13)]
         [InlineData(new []{10,8,9,2,1,4,13,12,15},10)]
@@ -84,11 +83,11 @@ namespace TestsForTask2
         {
             
             BinaryTree tree = new(values);
-            _helper.WriteLine($"before:\n{string.Join(",\r\n", tree.GetTreeInLine().AsEnumerable())}");
+            _helper.WriteLine($"before:\n{tree.AsString()}");
             tree.RemoveItem(toRemove);
             var node = tree.GetNodeByValue(toRemove);
-
-            _helper.WriteLine($"after:\n{string.Join(",\r\n", tree.GetTreeInLine().AsEnumerable())}");
+            
+            _helper.WriteLine($"after:\n{tree.AsString()}");
             Assert.Null(node);
         }
     }

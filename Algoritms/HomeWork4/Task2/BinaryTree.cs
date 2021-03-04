@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Task2
 {
     public class BinaryTree : ITree
@@ -74,8 +77,23 @@ namespace Task2
         {
             if (root.Value == value)
             {
-                root = Remove(root);
-                return;
+                if (root.Right is null)
+                {
+                    var newRoot = root.Left;
+                    root.Left = null;
+                    root = newRoot;
+                    return;
+                }
+                else
+                {
+                    var newRoot = Remove(root);
+                    newRoot.Left = root.Left;
+                    if (newRoot.Right is null) newRoot.Right = root.Right;
+                    root.Left = root.Right = null;
+                    root = newRoot;
+                    return;
+                }
+                
             }
 
             GetNodeWithParent(value, out var parent, out var toRemove);
@@ -162,8 +180,42 @@ namespace Task2
         /// <inheritdoc />
         public void PrintTree()
         {
+            // Stack<TreeNode> stack = new();
+            // stack.Push(root);
+            // TraverseDFS(stack);
+            Console.WriteLine();
+            Queue<TreeNode> queue = new();
+            queue.Enqueue(root);
+            TraverseBFS(queue);
         }
 
+        private void TraverseDFS(Stack<TreeNode> stack)
+        {
+            while (true)
+            {
+                var node = stack.Pop();
+                Console.WriteLine(node.Value);
+                if (node.Right is not null) stack.Push(node.Right);
+                if (node.Left is not null) stack.Push(node.Left);
+                if (stack.Count > 0) continue;
+                break;
+            }
+        }
+
+        private void TraverseBFS(Queue<TreeNode> queue)
+        {
+            while (true)
+            {
+                var node = queue.Dequeue();
+                Console.WriteLine(node.Value);
+                if (node.Right is not null) queue.Enqueue(node.Right);
+                if (node.Left is not null) queue.Enqueue(node.Left);
+                if (queue.Count > 0) continue;
+                break;
+            }   
+        }
+        
+        
         #endregion
     }
 }
