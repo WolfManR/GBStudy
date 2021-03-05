@@ -12,11 +12,8 @@ namespace TestsForTask2
         private readonly ITestOutputHelper _helper;
         private BinaryTree _sob => new BinaryTree();
 
-        public BinaryTreeTests(ITestOutputHelper helper)
-        {
-            _helper = helper;
-        }
-        
+        public BinaryTreeTests(ITestOutputHelper helper) => _helper = helper;
+
         [Fact]
         public void GetRoot_ReturnRoot_WithNoBranchesInTreeWithOneElement()
         {
@@ -79,10 +76,11 @@ namespace TestsForTask2
         [InlineData(new []{10,8,9,2,1,4,13,12,15},13)]
         [InlineData(new []{10,8,9,2,1,4,13,12,15},10)]
         [InlineData(new []{10,8,9,2,1,4,13,12,15},2)]
+        [InlineData(new []{16,8,9,2,1,4,24,26,19,21,20,23},16)]
         public void RemoveItem_RemoveCorrectNode_InTreeWithManyElements(int[] values,int toRemove)
         {
             
-            BinaryTree tree = new(values);
+            BinaryTree tree = new(false,values);
             _helper.WriteLine($"before:\n{tree.AsString()}");
             tree.RemoveItem(toRemove);
             var node = tree.GetNodeByValue(toRemove);
