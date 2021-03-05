@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Task2
 {
@@ -6,7 +7,18 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            BinaryTree tree = new(10, 8, 9, 2, 1, 4, 13, 12, 15);
+            int[] GenerateArray(int length,int maxNumber)
+            {
+                var r = new Random();
+                List<int> result = new();
+                for (var i = 0; result.Count < length; i++)
+                {
+                    result.Add(r.Next(maxNumber));
+                }
+                return result.ToArray(); 
+            }
+            
+            BinaryTree tree = new(true,GenerateArray(50,1000));
             Console.WriteLine(tree.AsString());
         }
 
