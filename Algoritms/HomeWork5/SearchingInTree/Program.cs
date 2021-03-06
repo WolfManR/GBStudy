@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SearchingInTree
 {
@@ -7,41 +6,25 @@ namespace SearchingInTree
     {
         static void Main(string[] args)
         {
+            var tree = new BinaryTree(16, 8, 9, 2, 1, 4, 24, 26, 19, 21, 20, 23);
             
-        }
-        
-        // ReSharper disable once InconsistentNaming
-        private void TraverseDFS(TreeNode root, int searchValue)
-        {
-            Stack<TreeNode> stack = new();
-            stack.Push(root);
+            var logger = new Logger(delayInSeconds: 0);
             
-            while (true)
-            {
-                var node = stack.Pop();
-                Console.WriteLine(node.Value);
-                if (node.Right is not null) stack.Push(node.Right);
-                if (node.Left is not null) stack.Push(node.Left);
-                if (stack.Count > 0) continue;
-                break;
-            }
-        }
+            logger.LogInfo($"Tree:\n{tree.AsString()}");
 
-        // ReSharper disable once InconsistentNaming
-        private void TraverseBFS(TreeNode root, int searchValue)
-        {
-            Queue<TreeNode> queue = new();
-            queue.Enqueue(root);
+            Console.WriteLine();
             
-            while (true)
-            {
-                var node = queue.Dequeue();
-                Console.WriteLine(node.Value);
-                if (node.Right is not null) queue.Enqueue(node.Right);
-                if (node.Left is not null) queue.Enqueue(node.Left);
-                if (queue.Count > 0) continue;
-                break;
-            }   
+            var dfs = tree.TraverseDFS(19,logger);
+            logger.LogInfo($"TraverseDFS found value is {dfs}");
+            
+            Console.WriteLine();
+            
+            var bfs = tree.TraverseBFS(19,logger);
+            logger.LogInfo($"TraverseDFS found value is {bfs}");
+
+            // Program Stop
+            Console.WriteLine("Work Done");
+            Console.ReadLine();
         }
     }
 }
