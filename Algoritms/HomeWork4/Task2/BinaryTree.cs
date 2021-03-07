@@ -202,46 +202,8 @@ namespace Task2
         }
 
         /// <inheritdoc />
-        public void PrintTree()
-        {
-            // Stack<TreeNode> stack = new();
-            // stack.Push(root);
-            // TraverseDFS(stack);
-            Console.WriteLine();
-            Queue<TreeNode> queue = new();
-            queue.Enqueue(_root);
-            TraverseBFS(queue);
-        }
+        public void PrintTree() => Console.WriteLine(this.AsString());
 
-        // ReSharper disable once InconsistentNaming
-        private void TraverseDFS(Stack<TreeNode> stack)
-        {
-            while (true)
-            {
-                var node = stack.Pop();
-                Console.WriteLine(node.Value);
-                if (node.Right is not null) stack.Push(node.Right);
-                if (node.Left is not null) stack.Push(node.Left);
-                if (stack.Count > 0) continue;
-                break;
-            }
-        }
-
-        // ReSharper disable once InconsistentNaming
-        private void TraverseBFS(Queue<TreeNode> queue)
-        {
-            while (true)
-            {
-                var node = queue.Dequeue();
-                Console.WriteLine(node.Value);
-                if (node.Right is not null) queue.Enqueue(node.Right);
-                if (node.Left is not null) queue.Enqueue(node.Left);
-                if (queue.Count > 0) continue;
-                break;
-            }   
-        }
-        
-        
         #endregion
     }
 }

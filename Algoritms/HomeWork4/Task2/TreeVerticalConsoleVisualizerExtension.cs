@@ -10,7 +10,7 @@ namespace Task2
         private const string Space = "   ";
         private static readonly StringBuilder Builder = new();
 
-        public static string AsString(this BinaryTree tree)
+        public static string AsString(this ITree tree)
         {
             var root = tree.GetRoot();
             BuildLine(root,"");
