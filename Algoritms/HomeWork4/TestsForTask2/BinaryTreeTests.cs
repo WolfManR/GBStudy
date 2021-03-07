@@ -88,5 +88,23 @@ namespace TestsForTask2
             _helper.WriteLine($"after:\n{tree.AsString()}");
             Assert.Null(node);
         }
+        
+        [Fact]
+        public void RemoveItem_RemoveCorrectNode_InTreeWithManyElements_Withnew()
+        {
+            // int[] values,int toRemove, (int,int)[] expected
+            var values = new[] {16, 8, 9, 2, 1, 4, 24, 26, 19, 21, 20, 23};
+            var toRemove = 16;
+            
+            BinaryTree tree = new(false,values);
+            var line = tree.GetTreeInLineForTest();
+            
+            _helper.WriteLine($"before:\n{tree.AsString()}");
+            tree.RemoveItem(toRemove);
+            var node = tree.GetNodeByValue(toRemove);
+            
+            _helper.WriteLine($"after:\n{tree.AsString()}");
+            Assert.Null(node);
+        }
     }
 }

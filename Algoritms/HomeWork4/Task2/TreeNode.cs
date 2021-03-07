@@ -17,7 +17,7 @@ namespace Task2
 
             return node.Value == Value;
         }
-
+        
         /// <inheritdoc />
         public override string ToString() => $"{nameof(Value)}: {Value}";
     }

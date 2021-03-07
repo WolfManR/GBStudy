@@ -15,5 +15,7 @@ namespace Task2
         /// <inheritdoc />
         public override string ToString() => 
             $"{nameof(Depth)}: {Depth}, {nameof(Node)}: {Node}";
+        
+        public static implicit operator (int,int)(NodeInfo info) => (info.Depth, info.Node.Value);
     }
 }
