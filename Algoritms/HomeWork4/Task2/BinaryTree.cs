@@ -41,6 +41,7 @@ namespace Task2
             if (_root is null)
             {
                 _root = new(value);
+                
                 _counter++;
                 return;
             }
@@ -57,6 +58,7 @@ namespace Task2
                     }
 
                     tmp.Right = new(value);
+                    
                     _counter++;
                     return;
                 }
@@ -70,12 +72,15 @@ namespace Task2
                     }
 
                     tmp.Left = new(value);
+                    
                     _counter++;
                     return;
                 }
 
-                if (value != tmp.Value) continue;
-                if(IgnoreExistValues)break;
+                if (value != tmp.Value)
+                    continue;
+                if(IgnoreExistValues)
+                    break;
                 throw new("There must be custom exception that value already in tree");
             }
         }
@@ -90,6 +95,7 @@ namespace Task2
                     var newRoot = _root.Left;
                     _root.Left = null;
                     _root = newRoot;
+                    
                     _counter--;
                     return;
                 }
@@ -100,6 +106,7 @@ namespace Task2
                     newRoot.Right ??= _root.Right;
                     _root.Left = _root.Right = null;
                     _root = newRoot;
+                    
                     _counter--;
                     return;
                 }
@@ -107,12 +114,14 @@ namespace Task2
             }
 
             GetNodeWithParent(value, out var parent, out var toRemove);
-            if (toRemove is null) return;
+            if (toRemove is null) 
+                return;
             if (parent.Left?.Value == value)
             {
                 var toReplace = Remove(toRemove);
                 toReplace.Left = toRemove.Left;
                 parent.Left = toReplace;
+                
                 _counter--;
                 return;
             }
@@ -121,6 +130,7 @@ namespace Task2
                 var toReplace = Remove(toRemove);
                 toReplace.Left = toRemove.Left;
                 parent.Right = toReplace;
+                
                 _counter--;
             }
         }
@@ -135,28 +145,28 @@ namespace Task2
             {
                 var toLeave = 0;
                 if (current!.Left is not null)
-                {
                     toLeave++;
-                }
-
                 if (current.Right is not null)
-                {
                     toLeave++;
-                }
-                if(toLeave == 0) break;
+                if(toLeave == 0) 
+                    break;
+                
                 prev = current;
                 current = current.Left ?? current.Right;
             }
 
-            if(prev.Left?.Value == current.Value) prev.Left = null;
-            if (prev.Right?.Value == current.Value) prev.Right = null;
+            if(prev.Left?.Value == current.Value)
+                prev.Left = null;
+            if (prev.Right?.Value == current.Value)
+                prev.Right = null;
             return current;
         }
 
         private void GetNodeWithParent(int value, out TreeNode parent, out TreeNode searched)
         {
             parent = searched = null;
-            if (_root is null) return;
+            if (_root is null)
+                return;
             if (_root.Value == value)
             {
                 searched = _root;
@@ -190,7 +200,8 @@ namespace Task2
                     continue;
                 }
 
-                if (searched.Value == value) return;
+                if (searched.Value == value)
+                    return;
             }
         }
 

@@ -2,11 +2,14 @@ namespace Task2
 {
     public class TreeNode
     {
-        public TreeNode(int value) => Value = value;
         public int Value { get; set; }
         public TreeNode Left { get; set; }
         public TreeNode Right { get; set; }
 
+        public int Balance { get; set; }
+        
+        public TreeNode(int value) => Value = value;
+        
         public override bool Equals(object obj)
         {
             if (!(obj is TreeNode node))
