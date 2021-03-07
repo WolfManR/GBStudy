@@ -4,11 +4,13 @@ namespace SearchingInTree
     {
         private TreeNode _root;
         
+        
         public BinaryTree(params int[] values)
         {
             foreach (var t in values) AddItem(t);
         }
 
+        
         public TreeNode GetRoot() => _root;
 
         private void AddItem(int value)
@@ -46,7 +48,8 @@ namespace SearchingInTree
                     return;
                 }
 
-                if (value != tmp.Value) continue;
+                if (value != tmp.Value) 
+                    continue;
                 break;
             }
         }

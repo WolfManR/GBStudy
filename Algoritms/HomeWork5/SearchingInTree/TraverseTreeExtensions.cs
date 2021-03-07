@@ -40,7 +40,8 @@ namespace SearchingInTree
                     logger.LogStep(Behavior.Push, node.Left.Value, Side.Left);
                 }
                 
-                if (stack.Count > 0) continue;
+                if (stack.Count > 0) 
+                    continue;
                 break;
             }
 
@@ -83,7 +84,8 @@ namespace SearchingInTree
                     queue.Enqueue(node.Left);
                     logger.LogStep(Behavior.Enqueue, node.Left.Value, Side.Left);
                 }
-                if (queue.Count > 0) continue;
+                if (queue.Count > 0) 
+                    continue;
                 break;
             }   
             logger.LogInfo($"Failure on search value: {searchValue}");

@@ -7,11 +7,13 @@ namespace SearchingInTree
     {
         private readonly int _delayInSeconds;
         private const int Second = 1000;
+        
         public Logger(int delayInSeconds)
         {
             if (delayInSeconds < 0) throw new ArgumentException("delay can't be lower 0");
             _delayInSeconds = delayInSeconds;
         }
+        
 
         public void LogInfo(string info)
         {
@@ -50,6 +52,7 @@ namespace SearchingInTree
             
             Thread.Sleep(_delayInSeconds * Second);
         }
+        
         
         private void Header(string header, ConsoleColor color)
         {
