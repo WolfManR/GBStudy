@@ -141,24 +141,21 @@ namespace Task2
             if (node.Right is null) return node.Left;
             var prev = node;
             var current = node.Right;
-            while (true)
+            while (current.Left is not null)
             {
-                var toLeave = 0;
-                if (current!.Left is not null)
-                    toLeave++;
-                if (current.Right is not null)
-                    toLeave++;
-                if(toLeave == 0) 
-                    break;
-                
                 prev = current;
-                current = current.Left ?? current.Right;
+                current = current.Left;
             }
 
-            if(prev.Left?.Value == current.Value)
+            if (prev.Left?.Value != current.Value) return current;
+            
+            if (current.Right is not null)
+            {
+                prev.Left = current.Right;
+                current.Right = null;
+            }
+            else
                 prev.Left = null;
-            if (prev.Right?.Value == current.Value)
-                prev.Right = null;
             return current;
         }
 

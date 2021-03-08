@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Task2;
 using Xunit;
@@ -89,22 +90,36 @@ namespace TestsForTask2
             Assert.Null(node);
         }
         
-        [Fact]
-        public void RemoveItem_RemoveCorrectNode_InTreeWithManyElements_Withnew()
+        [Theory]
+        [MemberData(nameof(_paramsForTestWithLineArray))]
+        public void RemoveItem_RemoveCorrectNode_InTreeWithManyElements_WithLineArrayOnCheck(int[] values,int toRemove, (int,int)[] expected)
         {
-            // int[] values,int toRemove, (int,int)[] expected
-            var values = new[] {16, 8, 9, 2, 1, 4, 24, 26, 19, 21, 20, 23};
-            var toRemove = 16;
-            
             BinaryTree tree = new(false,values);
-            var line = tree.GetTreeInLineForTest();
             
             _helper.WriteLine($"before:\n{tree.AsString()}");
+            
             tree.RemoveItem(toRemove);
-            var node = tree.GetNodeByValue(toRemove);
             
             _helper.WriteLine($"after:\n{tree.AsString()}");
-            Assert.Null(node);
+            
+            Assert.Equal(expected, tree.GetTreeInLineForTest());
+        }
+
+
+        public static IEnumerable<object[]> _paramsForTestWithLineArray()
+        {
+            yield return new object[] 
+            {
+                new[] {10,8,9,2,1,4,13,12,15},
+                13,
+                new []{(0, 10), (1, 8), (1, 15), (2, 2), (2, 9), (2, 12), (3, 1), (3, 4)} 
+            };
+            yield return new object[] 
+            {
+                new[] {16, 8, 9, 2, 1, 4, 24, 26, 19, 21, 20, 23},
+                16,
+                new []{(0, 19), (1, 8), (1, 24), (2, 2), (2, 9), (2, 21), (2, 26), (3, 1), (3, 4), (3, 20), (3, 23)} 
+            };
         }
     }
 }
