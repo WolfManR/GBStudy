@@ -3,10 +3,41 @@ namespace Task2
     public class TreeNode
     {
         public int Value { get; set; }
-        public TreeNode Left { get; set; }
-        public TreeNode Right { get; set; }
+        
+        #region Left
+
+        private TreeNode _left;
+        public TreeNode Left
+        {
+            get => _left;
+            set
+            {
+                _left.Parent = null;
+                _left = value;
+                value.Parent = this;
+            }
+        }
+        
+        #endregion
+
+        #region Right
+
+        private TreeNode _right;
+        public TreeNode Right
+        {
+            get => _right;
+            set
+            {
+                _right.Parent = null;
+                _right = value;
+                value.Parent = this;
+            }
+        }
+        
+        #endregion
 
         public int Balance { get; set; }
+        public TreeNode Parent { get; set; }
         
         public TreeNode(int value) => Value = value;
         
