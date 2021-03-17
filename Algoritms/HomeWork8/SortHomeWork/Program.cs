@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace SortHomeWork
 {
@@ -94,6 +96,72 @@ namespace SortHomeWork
             }
 
             return (min, max);
+        }
+    }
+
+    public class ExternalSorter
+    {
+        private string fileToRead;
+        private int originalFileSize;
+        private long bucketSize;
+        private List<string> pathsToTempFiles = new ();
+        void ReadFile()
+        {
+            var fs = new FileStream(fileToRead, FileMode.Open);
+            var sr = new StreamReader(fs);
+            var length = fs.Length;
+            bucketSize = length / 5;
+
+            if (!Directory.Exists("Temp")) 
+                Directory.CreateDirectory("Temp");
+
+            const string tempFileFormatter = @"Temp/temp{0}.txt";
+            var currentBucket = 0;
+            while (!sr.EndOfStream)
+            {
+               var bucket =  FillBucket(sr, bucketSize, currentBucket == 4);
+                
+               bucket.Sort();
+
+               var bucketPath = string.Format(tempFileFormatter, currentBucket++);
+               pathsToTempFiles.Add(bucketPath);
+               SaveBucketToFile(bucketPath,bucket);
+            }
+
+
+            static List<int> FillBucket(StreamReader stream, long bucketSize, bool isLastBucket)
+            {
+                List<int> bucket = new();
+                var i = 0;
+                do
+                {
+                    var line = stream.ReadLine();
+                    if (!int.TryParse(line, out var number)) continue;
+                    
+                    bucket.Add(number);
+                    if(!isLastBucket)
+                        i++;
+                } while (i < bucketSize || !stream.EndOfStream);
+
+                return bucket;
+            }
+
+            static void SaveBucketToFile(string filePath, List<int> bucket)
+            {
+                using var sw = new StreamWriter(File.Create(filePath));
+                for (var i = 0; i < bucket.Count; i++)
+                {
+                    sw.WriteLine(bucket[i]);
+                }
+            }
+        }
+
+        void MergeBuckets(string outputPath)
+        {
+            if (pathsToTempFiles.Count <= 0)
+                throw new InvalidOperationException("There no one bucket");
+            
+            
         }
     }
 }
