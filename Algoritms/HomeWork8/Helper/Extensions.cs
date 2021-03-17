@@ -1,4 +1,7 @@
 ﻿// ReSharper disable once CheckNamespace
+
+using System.Collections.Generic;
+
 namespace System
 {
     public static class Extensions
@@ -17,9 +20,17 @@ namespace System
         /// <returns><paramref name="self"/></returns>
         public static int[] Fill(this int[] self, int min, int max)
         {
+            List<int> cache = new();
             for (var i = 0; i < self.Length; i++)
             {
-                self[i] = Rand.Next(min, max);
+                int value;
+                do
+                {
+                    value = Rand.Next(min, max);
+                } while (cache.Contains(value));
+                cache.Add(value);
+
+                self[i] = value;
             }
             return self;
         }
