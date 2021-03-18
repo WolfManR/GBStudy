@@ -61,5 +61,21 @@ namespace System
             self = other;
             other = temp;
         }
+        
+        
+        public static (int min, int max) GetMinAndMaxOfArray(this int[] self)
+        {
+            var max = self[0];
+            var min = self[0];
+            for (var i = 1; i < self.Length; i++)
+            {
+                if (self[i] > max)
+                    max = self[i];
+                if (self[i] < min)
+                    min = self[i];
+            }
+
+            return (min, max);
+        }
     }
 }
