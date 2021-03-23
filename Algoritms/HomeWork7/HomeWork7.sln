@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1", "Task1\Task1.csproj", "{5798ED42-D85C-4C48-8515-699A759734C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicProgramingLesson", "DynamicProgramingLesson\DynamicProgramingLesson.csproj", "{3C15B64D-1369-4DBB-8606-DEF32A95DB29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5798ED42-D85C-4C48-8515-699A759734C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5798ED42-D85C-4C48-8515-699A759734C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5798ED42-D85C-4C48-8515-699A759734C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5798ED42-D85C-4C48-8515-699A759734C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C15B64D-1369-4DBB-8606-DEF32A95DB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C15B64D-1369-4DBB-8606-DEF32A95DB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C15B64D-1369-4DBB-8606-DEF32A95DB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C15B64D-1369-4DBB-8606-DEF32A95DB29}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
